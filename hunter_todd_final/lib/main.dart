@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'recipes.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-void main() {
-  runApp(const MyCookBook());
-}
+import '/home_page.dart';
+import '/recipe_list_page.dart';
+import '/search_page.dart';
+import '/favorites_page.dart';
 
-
+void main() => runApp(const MyCookBook());
 
 class MyCookBook extends StatelessWidget {
   const MyCookBook({super.key});
@@ -14,45 +15,24 @@ class MyCookBook extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'My CookBook',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyCookBookApp(),
-    );
-  }
-}
-
-class MyCookBookApp extends StatefulWidget {
-  const MyCookBookApp({super.key});
-
-  @override
-  State<MyCookBookApp> createState() => _MyCookBookAppState();
-}
-
-class _MyCookBookAppState extends State<MyCookBookApp> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('My CookBook'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'Welcome to My CookBook!',
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => RecipeList()));
-              },
-              child: const Text('View Recipes'),
-            ),
-          ],
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
+        textTheme: GoogleFonts.merriweatherTextTheme(),
+        appBarTheme: const AppBarTheme(
+          centerTitle: true,
+          backgroundColor: Colors.teal,
+          foregroundColor: Colors.white,
         ),
       ),
+      initialRoute: '/',
+      routes: {
+        '/':          (_) => const HomePage(),
+        '/recipes':   (_) => const RecipeListPage(),
+        '/search':    (_) => const SearchPage(),
+        '/favorites': (_) => const FavoritesPage(),
+      },
     );
   }
 }
-
